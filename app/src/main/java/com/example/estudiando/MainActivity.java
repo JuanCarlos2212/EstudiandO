@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 usuario = edtUsuario.getText().toString();
                 password = edtPassword.getText().toString();
                 if(!usuario.isEmpty() && !password.isEmpty()) {
-                    validarUsuario("http://192.168.1.7:8080/appMobileEstudiando/validar_usuario.php");
+                    validarUsuario("http://192.168.1.7:8080/appMobileEstudiando/Docentes/validardocenteHash.php");
                 }else{
                     Toast.makeText(MainActivity.this,"No se permiten campos vacios",Toast.LENGTH_SHORT) .show();
                 }
@@ -55,12 +55,12 @@ public class MainActivity extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if(response.isEmpty()){
-
-                    Toast.makeText(MainActivity.this,"Usuario o Contraseña incorrecta",Toast.LENGTH_SHORT) .show();
-                }else{
+                if(!response.isEmpty()){
                     Intent intent=new Intent(getApplicationContext(),PrincipalActivity.class);
                     startActivity(intent);
+
+                }else{
+                    Toast.makeText(MainActivity.this,"Usuario o Contraseña incorrecta",Toast.LENGTH_SHORT) .show();
                 }
             }
         }, new Response.ErrorListener() {
